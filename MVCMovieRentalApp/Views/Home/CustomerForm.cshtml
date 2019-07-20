@@ -1,0 +1,46 @@
+﻿@*@model MVCMovieRentalApp.Models.Customer*@
+@model MVCMovieRentalApp.ViewModels.NewCustomerViewModel
+@{
+    ViewBag.Title = "CustomerForm";
+}
+
+<h2>Customer Form</h2>
+<hr class="" />
+
+@using (Html.BeginForm("AddCustomer", "Home"))
+{
+    <table class="form-group">
+        <tr>
+            <td class="alert-info text-center">@Html.LabelFor(m => m.Customer.Name)</td>
+            <td>
+                @Html.TextBoxFor(m => m.Customer.Name, new { @class = "form-control" })<br />
+                @Html.ValidationMessageFor(m => m.Customer.Name)
+            </td>
+            
+        </tr>
+
+        <tr>
+            <td class="alert-info text-center"><strong>Date of Birth</strong></td>
+            <td>@Html.TextBoxFor(m => m.Customer.DateOfBirth, new { @class = "form-control" })</td>
+        </tr>
+
+        <tr> 
+            <td class="alert-info text-center"><strong>Select Membership Type</strong></td>
+            <td>
+                @Html.DropDownListFor(m => m.Customer.MembershipTypeId,
+                      new SelectList(Model.MembershipTypes, "Id", "Type"),
+                      "Select Type",
+                      new { @class = "form-control" })
+            </td>
+        </tr>
+
+        <tr>
+            <td class="checkbox text-center">@Html.CheckBoxFor(m => m.Customer.IsSubscribedToNewsLetter)Subscribed to Newsletter?</td>
+        </tr>
+
+    </table>
+
+    @Html.HiddenFor(c=>c.Customer.Id)
+    <button class="btn btn-primary" type="submit">Register</button>
+
+}

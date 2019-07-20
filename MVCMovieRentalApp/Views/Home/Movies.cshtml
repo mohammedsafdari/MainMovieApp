@@ -1,0 +1,20 @@
+﻿@model IEnumerable<MVCMovieRentalApp.Models.Movie>
+@{
+    ViewBag.Title = "Movies";
+}
+
+<h2>Movies List</h2>
+
+<table class="table table-responsive table-hover table-bordered table-striped">
+    <tr>
+        <th>Name</th>
+        <th>Genre</th>
+    </tr>
+    @foreach (var item in (IEnumerable < MVCMovieRentalApp.Models.Movie >)Model)
+    {
+    <tr>
+        <td>@Html.ActionLink(item.MovieName, "MovieDetails", item)</td>
+        <td>@item.Genre.GenreType</td>
+    </tr>
+    }
+</table>

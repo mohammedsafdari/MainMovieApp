@@ -1,0 +1,55 @@
+﻿@model MVCMovieRentalApp.Models.Customer
+@{
+    ViewBag.Title = "CustomerDetails";
+}
+
+<h2>@Model.Name Details</h2>
+
+<table class="table table-responsive table-hover table-bordered table-striped">
+    <tr>
+        <td>ID</td>
+        <td>@Model.Id</td>
+    </tr>
+    <tr>
+        <td>Name</td>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <td>Subscribed to news letter</td>
+        @if (Model.IsSubscribedToNewsLetter)
+        {
+            <td>Yes</td>
+        }
+        else
+        {
+            <td>No</td>
+        }
+    </tr>
+    <tr>
+        <td>Membership Type</td>
+        @switch (Model.MembershipType.Id)
+        {
+            case 1:
+                <td>Free</td>
+                break;
+            case 2:
+                <td>Monthly</td>
+                break;
+            case 3:
+                <td>Quarterly</td>
+                break;
+            case 4:
+                <td>Yearly</td>
+                break;
+            default:
+                break;
+        }
+    </tr>
+    <tr>
+        <td>Date of Birth</td>
+        <td>@Model.DateOfBirth.ToLongDateString()</td>
+    </tr>
+</table>
+
+@Html.HiddenFor(c=>c.Id)
+@Html.ActionLink("Edit Details", "CustEditForm", Model, new { @class = "btn btn-default" })

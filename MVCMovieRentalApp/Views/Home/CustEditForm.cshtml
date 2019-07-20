@@ -1,0 +1,41 @@
+﻿@*@model MVCMovieRentalApp.Models.Customer*@
+@model MVCMovieRentalApp.ViewModels.NewCustomerViewModel
+@{
+    ViewBag.Title = "CustomerForm";
+}
+
+<h2>Edit Customer Details</h2>
+<hr class="" />
+
+@using (Html.BeginForm("EditCustomer", "Home"))
+{
+    <table class="form-group">
+        <tr>
+            <td class="alert-info text-center">@Html.LabelFor(m => m.Customer.Name)</td>
+            <td>@Html.TextBoxFor(m => m.Customer.Name, new { @class = "form-control" })</td>
+        </tr>
+
+        <tr>
+            <td class="alert-info text-center">Date of Birth</td>
+            <td>@Html.TextBoxFor(m => m.Customer.DateOfBirth,"{0:d MMM yyyy}", new { @class = "form-control" })</td>
+        </tr>
+
+        <tr>
+            <td class="alert-info text-center">Select Membership Type</td>
+            <td>
+                @Html.DropDownListFor(m => m.Customer.MembershipTypeId,
+                           new SelectList(Model.MembershipTypes, "Id", "Type"),
+                           "Select Type",
+                           new { @class = "form-control" })
+            </td>
+        </tr>
+
+        <tr>
+            <td class="checkbox text-center">@Html.CheckBoxFor(m => m.Customer.IsSubscribedToNewsLetter)Subscribed to Newsletter?</td>
+        </tr>
+
+    </table>
+    @Html.HiddenFor(m=>m.Customer.Id)
+    <button class="btn btn-primary" type="submit">Save</button>
+
+}

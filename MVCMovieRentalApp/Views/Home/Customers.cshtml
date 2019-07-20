@@ -1,0 +1,47 @@
+﻿@model IEnumerable<MVCMovieRentalApp.Models.Customer>
+@{
+    ViewBag.Title = "Index";
+}
+
+@section css {
+    <link href="@Url.Content("~/Customer/css")" rel="stylesheet" />
+}
+
+<h1 class="jumbotron text-center" style=" font-family:'Agency FB'; font-size:xx-large; height:130px; margin-top:10px; margin-bottom:10px; vertical-align:middle " ><strong><u>CUSTOMER LIST</u></strong></h1>
+
+<div class="jumbotron" style="margin-top: 5px; margin-bottom:15px">
+    <table class="table table-responsive table-hover table-bordered table-striped">
+
+        <tr>
+            <th>Customer Name</th>
+            <th>Membership Type</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(item.Name, "CustomerDetails", item)</td>
+                <td>@item.MembershipType.Type</td>
+                @*@switch (item.MembershipType.Id)
+                    {
+                        case 1:
+                             <td>Free</td>
+                             break;
+                        case 2:
+                             <td>Monthly</td>
+                             break;
+                        case 3:
+                             <td>Quarterly</td>
+                            break;
+                        case 4:
+                            <td>Yearly</td>
+                            break;
+                        default:
+                            break;
+                    }*@
+            </tr>
+            @Html.HiddenFor(c => item.Id)
+        }
+    </table>
+</div>
+
+@Html.ActionLink("New Customer? Register!", "CustomerForm", "Home", new { @class = "btn btn-default" })
